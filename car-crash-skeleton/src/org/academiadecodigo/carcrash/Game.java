@@ -62,21 +62,25 @@ public class Game {
 
     private void moveAllCars() {
 
-       for (int i = 0; i < cars.length; i++) {
-           cars[i].move();
-           for (int j = i + 1; j < cars.length - 1; j++) {
-               boolean samePosition = ((cars[i].getPos().getCol() == cars[j].getPos().getCol()) && (cars[i].getPos().getRow() == cars[j].getPos().getRow()));
-                    if (samePosition) {
-                        cars[i].setCrashed();
-                        cars[j].setCrashed();
-                        i++;
-                    }
-            }
+       for (Car cMoving : cars) {
+           cMoving.move();
+
+           for (Car c : cars) {
+               if (cMoving == c) {
+                   continue;
+               }
+
+           boolean samePosition = ((cMoving.getPos().getCol() == c.getPos().getCol()) && (cMoving.getPos().getRow() == c.getPos().getRow()));
+               if (samePosition) {
+                  cMoving.setCrashed();
+                  c.setCrashed();
+               }
+           }
 
        }
 
     }
-//
+
 
 
 }

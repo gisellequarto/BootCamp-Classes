@@ -21,7 +21,7 @@ abstract  public class Car {
 
 
     public String toString() {
-        return carType.toString();
+        return isCrashed() ? "C" : carType.toString();
     }
 
     public void setCrashed() {
@@ -42,10 +42,10 @@ abstract  public class Car {
     }
 
     public Position move () {
-        boolean canGoRight = pos.getCol() < (100 - getSpeed());
-        boolean canGoLeft = pos.getCol() > (0 + getSpeed());
-        boolean canGoDown = pos.getRow() < (25 - getSpeed());
-        boolean canGoUp = pos.getRow() > (0 + getSpeed());
+        boolean canGoRight = pos.getCol() <= (99 - getSpeed());
+        boolean canGoLeft = pos.getCol() >= (0 + getSpeed());
+        boolean canGoDown = pos.getRow() <= (24 - getSpeed());
+        boolean canGoUp = pos.getRow() >= (0 + getSpeed());
 
         if (this.isCrashed()) {
             return pos;

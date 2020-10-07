@@ -2,8 +2,8 @@ package org.academiadecodigo.carcrash.cars;
 
 public enum CarType {
 
-    SPORT("S", 5),
-    OLD_CAR("O", 2);
+    SPORT("S", 1),
+    OLD_CAR("O", 1);
 
     private String name;
     private int speed;
