@@ -14,10 +14,8 @@ public class Game {
 
     public void start() {
         for (GameObject g : gameObjects) {
-            if (g instanceof Tree) {
                 g.getMessage();
-                continue;
-            }
+
             if (g instanceof Destroyable) {
                 Destroyable destroyable = (Destroyable) g;
                 while (!destroyable.isDestroyed()) {
@@ -50,6 +48,10 @@ public class Game {
         }
 
         for (GameObject g : gameObjects) {
+            if(g instanceof Barrel) {
+                System.out.print(g.getMessage() + " ");
+                continue;
+            }
             System.out.print(g.getClass().getSimpleName() + " ");
         }
         System.out.println(" ");

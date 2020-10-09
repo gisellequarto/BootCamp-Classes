@@ -6,8 +6,8 @@ public class Barrel extends GameObject implements Destroyable{
     private int currentDamage;
     private boolean destroyed;
 
-    public Barrel(){
-        type = randomType();
+    public Barrel() {
+        randomType();
     }
 
     @Override
@@ -17,7 +17,6 @@ public class Barrel extends GameObject implements Destroyable{
             return;
         }
         currentDamage += damage;
-        System.out.println(this.getMessage() + (type.getMaxDamage() - currentDamage));
 
     }
 
@@ -31,16 +30,8 @@ public class Barrel extends GameObject implements Destroyable{
     }
 
     private BarrelType randomType() {
-        int randomType = ((int) (Math.random() * BarrelType.values().length));
-            switch (randomType) {
-                case 0:
-                    return BarrelType.PLASTIC;
-                case 1:
-                    return BarrelType.WOOD;
-                case 2:
-                    return BarrelType.METAL;
-            }
-        return null;
+        type = BarrelType.values()[((int) (Math.random() * BarrelType.values().length))];
+        return type;
     }
 
 

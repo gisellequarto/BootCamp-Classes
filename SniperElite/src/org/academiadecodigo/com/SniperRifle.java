@@ -16,7 +16,7 @@ public class SniperRifle {
         }
         if (destroyable instanceof Barrel) {
             destroyable.hit(bulletDamage);
-            System.out.println("BANG! Fucking Barrel");
+            System.out.println("BANG! Fucking " + ((Barrel) destroyable).getMessage());
             return;
         }
         System.out.println("BANG! DIE " + destroyable.getClass().getSimpleName() + "!");
