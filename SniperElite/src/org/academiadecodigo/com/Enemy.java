@@ -1,6 +1,6 @@
 package org.academiadecodigo.com;
 
-public abstract class Enemy extends GameObject{
+public abstract class Enemy extends GameObject implements Destroyable{
 
     private int health;
     private boolean isDead;
@@ -26,6 +26,7 @@ public abstract class Enemy extends GameObject{
         isDead = true;
     }
 
+    @Override
     public void hit (int damage){
         if(health <= damage){
             this.kill();
@@ -33,5 +34,9 @@ public abstract class Enemy extends GameObject{
         health -= damage;
     }
 
+    @Override
+    public boolean isDestroyed() {
+        return isDead();
+    }
 
 }

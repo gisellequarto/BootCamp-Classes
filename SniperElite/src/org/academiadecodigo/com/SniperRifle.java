@@ -8,15 +8,19 @@ public class SniperRifle {
         bulletDamage = 10;
     }
 
-    public void shoot(Enemy enemy){
+    public void shoot(Destroyable destroyable){
         int fatalShot = ((int) (Math.random() * 10));
         if (fatalShot <= 2) {
-            enemy.kill();
-            System.out.println("FATAL SHOT!");
+            System.out.println("MISSED SHOT!");
             return;
         }
-        System.out.println("BANG! DIE " + enemy.getClass().getSimpleName() + "!");
-        enemy.hit(bulletDamage);
+        if (destroyable instanceof Barrel) {
+            destroyable.hit(bulletDamage);
+            System.out.println("BANG! Fucking Barrel");
+            return;
+        }
+        System.out.println("BANG! DIE " + destroyable.getClass().getSimpleName() + "!");
+        destroyable.hit(bulletDamage);
     }
 
 
