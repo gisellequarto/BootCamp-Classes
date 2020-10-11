@@ -13,7 +13,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class SimpleGfxGridPosition extends AbstractGridPosition {
 
     private Rectangle rectangle;
-    private SimpleGfxGrid simpleGfxGrid;
+    private SimpleGfxGrid grid;
 
     /**
      * Simple graphics position constructor
@@ -21,7 +21,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      */
     public SimpleGfxGridPosition(SimpleGfxGrid grid){
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
-        rectangle = new Rectangle(getCol() * grid.getCellSize() + grid.getX(), getRow() * grid.getCellSize() + grid.getY(), grid.getCellSize(), grid.getCellSize());
+        rectangle = new Rectangle(getCol() * grid.getCellSize() + SimpleGfxGrid.PADDING, getRow() * grid.getCellSize() + SimpleGfxGrid.PADDING, grid.getCellSize(), grid.getCellSize());
         setColor(getColor());
         rectangle.draw();
     }
@@ -34,7 +34,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      */
     public SimpleGfxGridPosition(int col, int row, SimpleGfxGrid grid){
         super(col, row, grid);
-        rectangle = new Rectangle(col * grid.getCellSize() + grid.getX(), row * grid.getCellSize() + grid.getY(), grid.getCellSize(), grid.getCellSize());
+        rectangle = new Rectangle(col * grid.getCellSize() + SimpleGfxGrid.PADDING, row * grid.getCellSize() + SimpleGfxGrid.PADDING, grid.getCellSize(), grid.getCellSize());
         setColor(getColor());
         rectangle.draw();
     }
@@ -60,8 +60,29 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      */
     @Override
     public void moveInDirection(GridDirection direction, int distance) {
+
+        switch (direction) {
+
+            case UP:
+                int maxRowsUp = distance < getRow() ? distance : getRow();
+                rectangle.translate(0, -maxRowsUp * SimpleGfxGrid.PADDING);
+                break;
+            case DOWN:
+                int maxRowsDown = distance > getGrid().getRows() - (getRow() + 1) ? getGrid().getRows() - (getRow() + 1) : distance;
+                rectangle.translate(0, (maxRowsDown) * SimpleGfxGrid.PADDING);
+                break;
+            case LEFT:
+                int maxRowsLeft = distance < getCol() ? distance : getCol();
+                rectangle.translate(-maxRowsLeft * SimpleGfxGrid.PADDING, 0);
+                break;
+            case RIGHT:
+                int maxRowsRight = distance > getGrid().getCols() - (getCol() + 1) ? getGrid().getCols() - (getCol() + 1) : distance;
+                rectangle.translate((maxRowsRight) * SimpleGfxGrid.PADDING, 0);
+                break;
+        }
+
         super.moveInDirection(direction, distance);
-      //  show();
+
     }
 
     /**
