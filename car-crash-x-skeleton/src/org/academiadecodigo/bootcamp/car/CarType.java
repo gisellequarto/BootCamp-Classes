@@ -8,7 +8,8 @@ import org.academiadecodigo.bootcamp.grid.GridColor;
 public enum CarType {
 
     FIAT(GridColor.BLUE),
-    MUSTANG(GridColor.GREEN);
+    MUSTANG(GridColor.GREEN),
+    WAR_TANK(GridColor.MAGENTA);
 
     private GridColor color;
 
