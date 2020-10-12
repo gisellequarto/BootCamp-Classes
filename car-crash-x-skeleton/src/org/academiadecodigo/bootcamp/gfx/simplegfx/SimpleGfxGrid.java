@@ -11,11 +11,12 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class SimpleGfxGrid implements Grid {
 
     public static final int PADDING = 10;
+    public static final int CELL_SIZE = 10;
     private int cols;
     private int rows;
     private Rectangle rec;
 
-    public SimpleGfxGrid(int cols, int rows){
+    public SimpleGfxGrid(int cols, int rows) {
         this.cols = cols;
         this.rows = rows;
     }
@@ -36,7 +37,7 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public int getCols() {
-        return  cols;
+        return cols;
     }
 
     /**
@@ -49,22 +50,25 @@ public class SimpleGfxGrid implements Grid {
 
     /**
      * Obtains the width of the grid in pixels
+     *
      * @return the width of the grid
      */
     public int getWidth() {
-        return getCols()*getCellSize();
+        return getCols() * getCellSize();
     }
 
     /**
      * Obtains the height of the grid in pixels
+     *
      * @return the height of the grid
      */
     public int getHeight() {
-        return getRows()*getCellSize();
+        return getRows() * getCellSize();
     }
 
     /**
      * Obtains the grid X position in the SimpleGFX canvas
+     *
      * @return the x position of the grid
      */
     public int getX() {
@@ -73,6 +77,7 @@ public class SimpleGfxGrid implements Grid {
 
     /**
      * Obtains the grid Y position in the SimpleGFX canvas
+     *
      * @return the y position of the grid
      */
     public int getY() {
@@ -81,10 +86,11 @@ public class SimpleGfxGrid implements Grid {
 
     /**
      * Obtains the pixel width and height of a grid position
+     *
      * @return
      */
     public int getCellSize() {
-        return PADDING;
+        return CELL_SIZE;
     }
 
     /**
@@ -94,6 +100,7 @@ public class SimpleGfxGrid implements Grid {
     public GridPosition makeGridPosition() {
         return new SimpleGfxGridPosition(this);
     }
+
     /**
      * @see Grid#makeGridPosition(int, int)
      */
@@ -104,19 +111,21 @@ public class SimpleGfxGrid implements Grid {
 
     /**
      * Auxiliary method to compute the y value that corresponds to a specific row
+     *
      * @param row index
      * @return y pixel value
      */
     public int rowToY(int row) {
-        throw new UnsupportedOperationException();
+        return row * getCellSize() + PADDING;
     }
 
     /**
      * Auxiliary method to compute the x value that corresponds to a specific column
+     *
      * @param column index
      * @return x pixel value
      */
     public int columnToX(int column) {
-        throw new UnsupportedOperationException();
+        return column * getCellSize() + PADDING;
     }
 }

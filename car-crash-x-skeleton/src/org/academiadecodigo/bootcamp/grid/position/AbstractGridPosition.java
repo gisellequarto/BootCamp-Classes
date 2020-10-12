@@ -19,9 +19,9 @@ public abstract class AbstractGridPosition implements GridPosition {
     /**
      * Construct a new grid position at a specific column and row
      *
-     * @param col   the column of the grid position
-     * @param row   the row of the grid position
-     * @param grid  the grid in which the position will be displayed
+     * @param col  the column of the grid position
+     * @param row  the row of the grid position
+     * @param grid the grid in which the position will be displayed
      */
     public AbstractGridPosition(int col, int row, Grid grid) {
         this.col = col;
