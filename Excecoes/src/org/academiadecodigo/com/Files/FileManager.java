@@ -7,7 +7,7 @@ import org.academiadecodigo.com.Excecoes.NotEnoughSpaceException;
 public class FileManager {
 
     private boolean logged;
-    File[] files;
+    private File[] files;
 
     public FileManager(int numsOfFiles) {
         files = new File[numsOfFiles];
@@ -27,7 +27,7 @@ public class FileManager {
         }
 
         for (File f : files) {
-            if (f.getName() == fileName) {
+            if (f.getName().equals(fileName)) {
                 System.out.println("Here´s you file: " + f.getName());
                 return f;
             }
@@ -46,7 +46,7 @@ public class FileManager {
                 return;
             }
         }
-        throw new NotEnoughSpaceException();
+        throw new NotEnoughSpaceException(fileName);
 
     }
 

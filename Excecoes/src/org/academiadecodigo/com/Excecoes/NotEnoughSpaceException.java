@@ -4,12 +4,9 @@ import org.academiadecodigo.com.Excecoes.FileException;
 
 public class NotEnoughSpaceException extends FileException {
 
-    public NotEnoughSpaceException() {
-
+    public NotEnoughSpaceException(String fileName) {
+        super("There is no space to the file: " + fileName);
     }
 
-    @Override
-    public String getMessage() {
-        return "There is no space to this file";
-    }
+
 }
