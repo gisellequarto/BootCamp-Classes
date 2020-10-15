@@ -13,28 +13,30 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class SimpleGfxGridPosition extends AbstractGridPosition {
 
     private Rectangle rectangle;
-    private SimpleGfxGrid simpleGfxGrid;
+    private SimpleGfxGrid grid;
 
     /**
      * Simple graphics position constructor
+     *
      * @param grid Simple graphics grid
      */
-    public SimpleGfxGridPosition(SimpleGfxGrid grid){
+    public SimpleGfxGridPosition(SimpleGfxGrid grid) {
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
-        rectangle = new Rectangle(getCol() * grid.getCellSize() + SimpleGfxGrid.PADDING, getRow() * grid.getCellSize() + SimpleGfxGrid.PADDING, grid.getCellSize(), grid.getCellSize());
+        rectangle = new Rectangle(grid.columnToX(getCol()), grid.rowToY(getRow()), grid.getCellSize(), grid.getCellSize());
         setColor(getColor());
         rectangle.draw();
     }
 
     /**
      * Simple graphics position constructor
-     * @param col position column
-     * @param row position row
+     *
+     * @param col  position column
+     * @param row  position row
      * @param grid Simple graphics grid
      */
-    public SimpleGfxGridPosition(int col, int row, SimpleGfxGrid grid){
+    public SimpleGfxGridPosition(int col, int row, SimpleGfxGrid grid) {
         super(col, row, grid);
-        rectangle = new Rectangle(col * grid.getCellSize() + SimpleGfxGrid.PADDING, row * grid.getCellSize() + SimpleGfxGrid.PADDING, grid.getCellSize(), grid.getCellSize());
+        rectangle = new Rectangle(grid.columnToX(getCol()), grid.rowToY(getRow()), grid.getCellSize(), grid.getCellSize());
         setColor(getColor());
         rectangle.draw();
     }
@@ -60,10 +62,15 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      */
     @Override
     public void moveInDirection(GridDirection direction, int distance) {
-        rectangle.delete();
+        int xInitial = getCol();
+        int yInitial = getRow();
+
         super.moveInDirection(direction, distance);
-        rectangle.draw();
-        rectangle.fill();
+
+        int xFinal = getCol();
+        int yFinal = getRow();
+
+        rectangle.translate((xFinal - xInitial) * SimpleGfxGrid.CELL_SIZE, (yFinal - yInitial) * SimpleGfxGrid.CELL_SIZE);
     }
 
     /**

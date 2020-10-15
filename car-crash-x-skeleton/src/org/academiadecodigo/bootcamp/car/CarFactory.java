@@ -26,6 +26,9 @@ public class CarFactory {
             case MUSTANG:
                 car = new Mustang(grid.makeGridPosition());
                 break;
+            case WAR_TANK:
+                car = new WarTank(grid.makeGridPosition());
+                break;
             default:
                 car = new Fiat(grid.makeGridPosition());
         }
