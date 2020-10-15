@@ -8,14 +8,21 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
+        
+        Picture picture = new Picture(10, 10, "assets/city.jpg");
+        picture.draw();
 
-        Picture back 
+        int counter = 0;
+
+        while (counter < 50) {
+            picture.translate(0, 10);
+            Thread.sleep(1500L);
+            counter++;
+        }
 
 
-        Ellipse sun = new Ellipse(20,20,50, 50);
-        sun.setColor(Color.YELLOW);
-        sun.fill();
+
 
 
     }
