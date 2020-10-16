@@ -36,7 +36,7 @@ public class LinkedList<T> {
      * @param index the index of the element
      * @return the element
      */
-    public Object get(int index) {
+    public T get(int index) {
         int counter = 0;
         Node iterator = head.getNext();
 
@@ -96,7 +96,7 @@ public class LinkedList<T> {
 
     }
 
-    private class Node<T> {
+    private class Node {
 
         private T data;
         private Node next;
