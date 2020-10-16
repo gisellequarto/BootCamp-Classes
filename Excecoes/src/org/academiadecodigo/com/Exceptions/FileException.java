@@ -1,4 +1,4 @@
-package org.academiadecodigo.com.Excecoes;
+package org.academiadecodigo.com.Exceptions;
 
 public class FileException extends Exception {
 

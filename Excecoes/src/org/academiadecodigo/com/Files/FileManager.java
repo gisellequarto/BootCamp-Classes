@@ -1,8 +1,8 @@
 package org.academiadecodigo.com.Files;
 
-import org.academiadecodigo.com.Excecoes.FileNotFoundException;
-import org.academiadecodigo.com.Excecoes.NotEnoughPermissionsException;
-import org.academiadecodigo.com.Excecoes.NotEnoughSpaceException;
+import org.academiadecodigo.com.Exceptions.FileNotFoundException;
+import org.academiadecodigo.com.Exceptions.NotEnoughPermissionsException;
+import org.academiadecodigo.com.Exceptions.NotEnoughSpaceException;
 
 public class FileManager {
 

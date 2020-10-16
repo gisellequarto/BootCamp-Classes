@@ -1,6 +1,9 @@
 package org.academiadecodigo.bootcamp.containers;
 
-public class LinkedList<T> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<T> implements Iterable<T> {
 
     private Node head;
     private int length = 0;
@@ -96,6 +99,11 @@ public class LinkedList<T> {
 
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedIterator();
+    }
+
     private class Node {
 
         private T data;
@@ -123,4 +131,23 @@ public class LinkedList<T> {
         }
     }
 
+    private class LinkedIterator implements Iterator<T> {
+
+        private Node pointer = head;
+
+        @Override
+        public boolean hasNext() {
+            return pointer.getNext() != null;
+        }
+
+        @Override
+        public T next() {
+            if (hasNext()) {
+                pointer = pointer.getNext();
+                return pointer.getData();
+            }
+            throw new NoSuchElementException();
+        }
+
+    }
 }

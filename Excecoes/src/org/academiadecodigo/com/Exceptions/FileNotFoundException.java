@@ -1,6 +1,4 @@
-package org.academiadecodigo.com.Excecoes;
-
-import org.academiadecodigo.com.Excecoes.FileException;
+package org.academiadecodigo.com.Exceptions;
 
 public class FileNotFoundException extends FileException {
 

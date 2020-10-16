@@ -1,5 +1,7 @@
 package org.academiadecodigo.bootcamp.containers;
 
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -15,7 +17,9 @@ public class Main {
 
         //stringList.add(4);
 
-        System.out.println(stringList.get(3));
+        for (String str : stringList) {
+            System.out.println(str);
+        }
 
         LinkedList<Integer> numList = new LinkedList<>();
 
@@ -27,8 +31,16 @@ public class Main {
         numList.add(9);
         numList.add(5);
 
-        System.out.println(numList.get(5));
-        System.out.println(numList.indexOf(6));
+       for (Integer n : numList){
+           System.out.println(n);
+       }
+
+
+        System.out.println("---------- Teste Personalizado ---------");
+        Iterator<Integer> it = numList.iterator();
+       while (it.hasNext()) {
+           System.out.println(it.next());
+       }
 
         // numList.add("Hello");
 

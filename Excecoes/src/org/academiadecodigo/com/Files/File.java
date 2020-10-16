@@ -8,7 +8,6 @@ public class File {
         this.name = name;
     }
 
-
     String getName() {
         return name;
     }

@@ -1,8 +1,8 @@
 package org.academiadecodigo.com;
 
-import org.academiadecodigo.com.Excecoes.FileNotFoundException;
-import org.academiadecodigo.com.Excecoes.NotEnoughPermissionsException;
-import org.academiadecodigo.com.Excecoes.NotEnoughSpaceException;
+import org.academiadecodigo.com.Exceptions.FileNotFoundException;
+import org.academiadecodigo.com.Exceptions.NotEnoughPermissionsException;
+import org.academiadecodigo.com.Exceptions.NotEnoughSpaceException;
 import org.academiadecodigo.com.Files.FileManager;
 
 public class Main {
@@ -12,7 +12,7 @@ public class Main {
         FileManager fileManager = new FileManager(3);
 
         try {
-            fileManager.createFile("Arquivo0");
+            fileManager.createFile("File0");
         } catch (NotEnoughPermissionsException e) {
             System.out.println(e.getMessage());
         } catch (NotEnoughSpaceException e) {
@@ -22,10 +22,10 @@ public class Main {
         fileManager.login();
 
         try {
-            fileManager.createFile("Arquivo0");
-            fileManager.createFile("Arquivo1");
-            fileManager.createFile("Arquivo2");
-            fileManager.createFile("Arquivo3");
+            fileManager.createFile("File0");
+            fileManager.createFile("File1");
+            fileManager.createFile("File2");
+            fileManager.createFile("File3");
         } catch (NotEnoughPermissionsException e) {
             System.out.println(e.getMessage());
         } catch (NotEnoughSpaceException e) {
