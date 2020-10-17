@@ -7,7 +7,6 @@ public enum Importance {
     HIGH;
 
 
-
     Importance() {
 
     }
