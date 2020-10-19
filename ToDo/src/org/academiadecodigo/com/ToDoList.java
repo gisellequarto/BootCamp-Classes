@@ -13,29 +13,12 @@ public class ToDoList implements Comparable<ToDoList>{
 
     @Override
     public int compareTo(ToDoList o) {
-        boolean bigger = (this.important == Importance.HIGH && (o.important == Importance.MEDIUM || o.important == Importance.LOW)) ||
-                (this.important == Importance.MEDIUM && o.important == Importance.LOW);
-
-    boolean lower = (o.important == Importance.HIGH && (this.important == Importance.MEDIUM || this.important == Importance.LOW)) ||
-                (o.important == Importance.MEDIUM && this.important == Importance.LOW);
-
-
         if (this.important == o.important) {
-            if (this.priority > o.priority) {
-                return 1;
-            } else if(this.priority < o.priority) {
-                return -1;
-            }
-            return 0;
+            return priority - o.priority;
         }
-        if(bigger) {
-            return -1;
-        } else if (lower) {
-            return 1;
-        }
-
-        return 0;
+        return o.important.compareTo(this.important);
     }
+
 
     public String toString() {
         return (important.toString() + " importance and priority: " + priority);
