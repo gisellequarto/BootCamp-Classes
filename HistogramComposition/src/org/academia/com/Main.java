@@ -6,21 +6,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Histogram hist = new Histogram();
+        Histogram histogram = new Histogram();
 
-        hist.add("hello hello crazy potatos potatos hello crazy hi");
+        histogram.add("hello hello crazy potatos potatos hello crazy hi");
 
 
 
-        Iterator it = hist.iterator();
+        Iterator it = histogram.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
         }
 
-        System.out.println(hist.getValue("potatos"));
-        System.out.println(hist.getValue("hello"));
-        System.out.println(hist.getValue("hi"));
-        System.out.println(hist.getValue("crazy"));
+        System.out.println(histogram.getValue("potatos"));
+        System.out.println(histogram.getValue("hello"));
+        System.out.println(histogram.getValue("hi"));
+        System.out.println(histogram.getValue("crazy"));
 
 
     }

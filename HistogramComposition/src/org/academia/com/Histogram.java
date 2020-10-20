@@ -7,7 +7,7 @@ public class Histogram implements Iterable {
     private Map<String, Integer> histogram;
 
     public Histogram() {
-        histogram = new HashMap<String, Integer>();
+        histogram = new TreeMap<>();
     }
 
     public void add(String str) {
@@ -30,16 +30,5 @@ public class Histogram implements Iterable {
         return histogram.keySet().iterator();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Histogram histogram1 = (Histogram) o;
-        return Objects.equals(histogram, histogram1.histogram);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(histogram);
-    }
 }
