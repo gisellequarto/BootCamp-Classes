@@ -1,44 +1,63 @@
 package org.academiadecodigo.com;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Range implements Iterable<Integer> {
 
-    LinkedList<Integer> list;
-    Integer first;
-    Integer last;
+    private Integer first;
+    private Integer last;
+    private boolean directionDown;
 
     public Range(int first, int last) {
         this.first = first;
         this.last = last;
-        list = new LinkedList<>();
-
     }
 
+    public void changeDirection(boolean change) {
+        directionDown = change;
+    }
 
-    private void add (int first) {
-        for (int i = 0; i <= last - first; i++) {
-            list.add(first);
-            first++;
+    @Override
+    public Iterator<Integer> iterator() {
+        if (directionDown) {
+            return new Iterator() {
+                private int actual = last;
+                private int min = first;
+
+                @Override
+                public boolean hasNext() {
+                    return actual >= min;
+                }
+
+                @Override
+                public Object next() {
+                    if (hasNext()) {
+                        return actual--;
+                    }
+                    throw new NoSuchElementException();
+                }
+            };
         }
+
+        return new Iterator() {
+            private int actual = first;
+            private int max = last;
+
+            @Override
+            public boolean hasNext() {
+                return actual <= max;
+            }
+
+            @Override
+            public Object next() {
+                if (hasNext()) {
+                    return actual++;
+                }
+                throw new NoSuchElementException();
+            }
+        };
     }
 
-    @Override
-    public Iterator iterator() {
-        return list.iterator();
-    }
-
-    @Override
-    public void forEach(Consumer action) {
-    }
-
-    @Override
-    public Spliterator spliterator() {
-        return null;
-    }
 
 }

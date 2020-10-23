@@ -5,10 +5,6 @@ import java.util.Iterator;
 
 public class Histogram extends HashMap<String, Integer> implements Iterable {
 
-    public Histogram() {
-        super();
-    }
-
     public void add(String str) {
         String[] temp = str.split(" ");
         for (String s : temp) {
