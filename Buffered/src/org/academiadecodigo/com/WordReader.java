@@ -1,10 +1,7 @@
 package org.academiadecodigo.com;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class WordReader implements Iterable<String> {
 
@@ -36,7 +33,7 @@ public class WordReader implements Iterable<String> {
 
         private FileReader reader;
         private BufferedReader bReader;
-        private List<String> list;
+        private Queue<String> list;
 
         public BufferIterator(String path) throws FileNotFoundException {
             reader = new FileReader(path);
@@ -44,17 +41,13 @@ public class WordReader implements Iterable<String> {
             list = new LinkedList<>();
         }
 
-        public boolean readLine() {
+        public boolean readWords() {
             try {
                 String line = "";
                 if ((line = bReader.readLine()) != null) {
                     String[] words = line.split(" ");
-                    for (String s : words) {
-                        list.add(s);
-                    }
+                    Collections.addAll(list, words);
                     return true;
-                } else {
-                    return false;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -66,10 +59,9 @@ public class WordReader implements Iterable<String> {
         @Override
         public boolean hasNext() {
             if (list.isEmpty()) {
-                if (!readLine()) {
-                    return false;
-                }
+                return readWords();
             }
+
             return true;
         }
 
@@ -77,7 +69,7 @@ public class WordReader implements Iterable<String> {
         @Override
         public String next() {
             if (hasNext()) {
-                return list.remove(0);
+                return list.poll();
             }
             throw new NoSuchElementException();
         }
