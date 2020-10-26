@@ -1,3 +1,5 @@
+package org.academiadecodigo.com;
+
 import java.io.IOException;
 
 public class CopyFile {
