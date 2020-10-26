@@ -30,5 +30,8 @@ public class Histogram implements Iterable {
         return histogram.keySet().iterator();
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 611e565511e000b4ac9a039b06f12f1ee9b28479
 }
