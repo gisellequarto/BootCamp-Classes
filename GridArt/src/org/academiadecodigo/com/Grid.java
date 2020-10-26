@@ -14,7 +14,7 @@ public class Grid {
     private int lines;
     private int columns;
     private List<Rectangle> rectanglesList;
-    private List<Boolean> savedStatus;
+    private List<Integer[]> savedStatus;
     private SaveArchive save;
     private String filePath;
 
@@ -52,13 +52,16 @@ public class Grid {
         }
     }
 
-    public void changeRectangle(int x, int y) {
+    public void changeRectangle(int x, int y, Cursor cursor) {
         for (Rectangle r : rectanglesList) {
             if ((r.getX() == x) && (r.getY() == y)) {
                 if (r.isFilled()) {
+                    r.setColor(Color.BLACK);
                     r.draw();
                     return;
                 }
+                Color actual = cursor.getColor();
+                r.setColor(actual);
                 r.fill();
             }
         }
@@ -67,7 +70,11 @@ public class Grid {
     public void saveRectanglesStatus() {
         savedStatus = new LinkedList<>();
         for (Rectangle r : rectanglesList) {
-            savedStatus.add(r.isFilled());
+            if(r.isFilled()) {
+            savedStatus.add(new Integer[]{1, rectangleColorIndex(r)});
+            continue;
+            }
+            savedStatus.add(new Integer[]{0, rectangleColorIndex(r)});
         }
         save = new SaveArchive(savedStatus, filePath);
         save.save();
@@ -78,11 +85,14 @@ public class Grid {
         savedStatus = load.getSavedStatus();
         int counter = 0;
         for (Rectangle r : rectanglesList) {
-            if (savedStatus.get(counter)) {
+            if (savedStatus.get(counter)[0] == 1) {
+                Color color = MenuGrid.colors[savedStatus.get(counter)[1]];
+                r.setColor(color);
                 r.fill();
                 counter++;
                 continue;
             }
+            r.setColor(Color.BLACK);
             r.draw();
             counter++;
         }
@@ -90,10 +100,21 @@ public class Grid {
 
     public void clear() {
         for (Rectangle r : rectanglesList) {
+            r.setColor(Color.BLACK);
             r.draw();
         }
     }
 
+    private int rectangleColorIndex(Rectangle rectangle) {
+        int colorIndex = -1;
+        for (int i = 0; i < MenuGrid.colors.length; i++) {
+            if (MenuGrid.colors[i] == rectangle.getColor()) {
+                colorIndex = i;
+                break;
+            }
+        }
+        return colorIndex;
+    }
 
 }
 

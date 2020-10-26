@@ -7,9 +7,11 @@ public class Cursor {
 
     private Rectangle cursor;
     private Grid grid;
+    private MenuGrid menu;
 
-    public Cursor(Grid grid) {
+    public Cursor(Grid grid, MenuGrid menu) {
         this.grid = grid;
+        this.menu = menu;
         cursor = new Rectangle(grid.PADDING, grid.PADDING, grid.CELL_SIZE, grid.CELL_SIZE);
         cursor.setColor(Color.YELLOW);
         cursor.fill();
@@ -56,8 +58,14 @@ public class Cursor {
     }
 
    public void paint() {
-        grid.changeRectangle(getX(), getY());
+        grid.changeRectangle(getX(), getY(), this);
    }
 
+    public Color getColor() {
+        return cursor.getColor();
+    }
 
+    public void setColor(Color color) {
+        cursor.setColor(color);
+    }
 }

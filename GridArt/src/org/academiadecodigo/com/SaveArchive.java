@@ -9,10 +9,10 @@ public class SaveArchive {
 
     private FileWriter writer;
     private BufferedWriter bWriter;
-    private List<Boolean> statusList;
+    private List<Integer[]> statusList;
     private String text;
 
-    public SaveArchive(List<Boolean> statusList, String filePath) {
+    public SaveArchive(List<Integer[]> statusList, String filePath) {
         this.statusList = statusList;
         text = "";
         try {
@@ -25,8 +25,9 @@ public class SaveArchive {
 
 
     private void statusToText() {
-        for (Boolean b : statusList) {
-            text += (b.toString()) + "\n";
+        for (Integer[] i : statusList) {
+            text += i[0] + " ";
+            text += i[1] + "\n";
         }
     }
 

@@ -11,7 +11,7 @@ public class LoadArchive {
 
     private FileReader fileReader;
     private BufferedReader bReader;
-    private List<Boolean> savedStatus;
+    private List<Integer[]> savedStatus;
 
     public LoadArchive(String filePath) {
         try {
@@ -29,15 +29,19 @@ public class LoadArchive {
     private void textToStatus () throws IOException {
         String line = "";
         while ((line = bReader.readLine()) != null) {
-            if(line.contains("true")){
-                savedStatus.add(true);
-                continue;
-            }
-            savedStatus.add(false);
+            String[] temp = line.split(" ");
+            Integer[] status = {Integer.valueOf(temp[0]), Integer.valueOf(temp[1])};
+            savedStatus.add(status);
         }
     }
 
-    public List<Boolean> getSavedStatus() {
+    public List<Integer[]> getSavedStatus() {
         return savedStatus;
     }
+
+
+
+
+
+
 }

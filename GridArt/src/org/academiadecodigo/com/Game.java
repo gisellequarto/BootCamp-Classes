@@ -3,59 +3,36 @@ package org.academiadecodigo.com;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.mouse.Mouse;
+import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
+import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
 
     private Grid grid;
     private Cursor cursor;
+    private MenuGrid menu;
 
     public Game(int l, int c) {
         grid = new Grid(l, c);
-       cursor = new Cursor(grid) ;
+        menu = new MenuGrid();
+        cursor = new Cursor(grid, menu);
     }
 
 
-    public void init(){
+    public void init() {
 
-        Keyboard keyboard = new Keyboard(new KeyboardListener(cursor, grid));
-        KeyboardEvent right = new KeyboardEvent();
-        KeyboardEvent left = new KeyboardEvent();
-        KeyboardEvent up = new KeyboardEvent();
-        KeyboardEvent down = new KeyboardEvent();
-        KeyboardEvent paint = new KeyboardEvent();
-        KeyboardEvent save = new KeyboardEvent();
-        KeyboardEvent load = new KeyboardEvent();
-        KeyboardEvent clear = new KeyboardEvent();
+        MouseListener mouseListener = new MouseListener(menu, cursor);
+        Mouse mouse = new Mouse(mouseListener);
+        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
 
-        right.setKey(KeyboardEvent.KEY_RIGHT);
-        left.setKey(KeyboardEvent.KEY_LEFT);
-        up.setKey(KeyboardEvent.KEY_UP);
-        down.setKey(KeyboardEvent.KEY_DOWN);
-        paint.setKey(KeyboardEvent.KEY_SPACE);
-        save.setKey(KeyboardEvent.KEY_S);
-        load.setKey(KeyboardEvent.KEY_L);
-        clear.setKey(KeyboardEvent.KEY_C);
-        right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        paint.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        save.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        load.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        clear.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(right);
-        keyboard.addEventListener(left);
-        keyboard.addEventListener(up);
-        keyboard.addEventListener(down);
-        keyboard.addEventListener(paint);
-        keyboard.addEventListener(save);
-        keyboard.addEventListener(load);
-        keyboard.addEventListener(clear);
-
-
-
+        KeyboardListener listener = new KeyboardListener(cursor, grid);
 
     }
+
 
 
 
