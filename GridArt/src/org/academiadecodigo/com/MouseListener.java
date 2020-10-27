@@ -17,7 +17,6 @@ public class MouseListener implements MouseHandler {
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        System.out.println(event.getX() + ", " + event.getY());
         menu.getRectangleColor(event.getX(), event.getY());
     }
 

@@ -20,6 +20,7 @@ public class Cursor {
     public void translate(int x, int y) {
         int posX = cursor.getX() + x;
         int posY = cursor.getY() + y;
+        setColor();
 
         if (posX >= grid.WIDTH) {
             if (x < 0) {
@@ -27,7 +28,7 @@ public class Cursor {
             }
             return;
         }
-        if(posY >= grid.HEIGHT) {
+        if (posY >= grid.HEIGHT) {
             if (y < 0) {
                 cursor.translate(x, y);
             }
@@ -39,7 +40,7 @@ public class Cursor {
             }
             return;
         }
-        if (posY < grid.PADDING){
+        if (posY < grid.PADDING) {
             if (y > 0) {
                 cursor.translate(x, y);
             }
@@ -57,15 +58,16 @@ public class Cursor {
         return cursor.getY();
     }
 
-   public void paint() {
+    public void paint() {
+        setColor();
         grid.changeRectangle(getX(), getY(), this);
-   }
+    }
 
     public Color getColor() {
         return cursor.getColor();
     }
 
-    public void setColor(Color color) {
-        cursor.setColor(color);
+    public void setColor() {
+        cursor.setColor(menu.getActualColor());
     }
 }

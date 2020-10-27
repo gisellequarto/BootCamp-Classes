@@ -37,9 +37,7 @@ public class MenuGrid {
 
     public void getRectangleColor(double x, double y) {
         for (Rectangle r : coloredRectangles) {
-            System.out.println(r.getX() + " " + r.getY() + " " + r.getWidth() + " " + r.getHeight());
-            System.out.println(x + " " + y);
-            if ((x >= r.getX() && x <= r.getWidth() + r.getX()) && (y >= r.getY() && y <= r.getHeight() + r.getY())) {
+            if ((x >= r.getX() && x <= (r.getWidth() + r.getX())) && (y - 28 >= r.getY() && y - 28 <= (r.getHeight() + r.getY()))) {
                 actualColor.setColor(r.getColor());
                 actualColor.fill();
             }
@@ -54,6 +52,9 @@ public class MenuGrid {
         actualColor.fill();
     }
 
+    public Color getActualColor() {
+        return actualColor.getColor();
+    }
 
 
     /* I tryed to show and COLLAPSE this Menu Grid (not yet!! soon)
