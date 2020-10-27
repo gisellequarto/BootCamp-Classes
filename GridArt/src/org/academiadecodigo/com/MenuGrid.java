@@ -12,7 +12,8 @@ public class MenuGrid {
 
     public static final int PADDING = Grid.WIDTH + 20;
     public static final int CELL_SIZE = 20;
-    public static final Color[] colors = {Color.RED, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK, Color.MAGENTA, Color.YELLOW, Color.ORANGE, Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY, Color.BLACK};
+    public static final Color[] colors = {Color.RED, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK, new Color(178, 156, 219), Color.MAGENTA, Color.YELLOW,
+            Color.ORANGE, Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY, Color.BLACK};
     List<Rectangle> coloredRectangles;
     private Rectangle actualColorBorder;
     private Rectangle actualColor;
