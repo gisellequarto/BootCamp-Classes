@@ -8,29 +8,27 @@ import java.net.SocketException;
 public class Server {
 
 
-    public static void receivePack(String message) {
-        byte[] recBuffer = message.getBytes();
-        DatagramPacket receivePack = new DatagramPacket(recBuffer, recBuffer.length);
+    public static void receivePack() {
+        byte[] recBuffer = new byte[2048];
         try {
             DatagramSocket socket = new DatagramSocket(8080);
+            DatagramPacket receivePack = new DatagramPacket(recBuffer, recBuffer.length);
             socket.receive(receivePack);
-            System.out.println(socket.getReceiveBufferSize());
             socket.close();
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String message = new String(recBuffer);
+        System.out.println(message);
     }
 
 
 
     public static void main(String[] args) {
 
-        String test = "hello";
-
-        receivePack(test);
-
+        receivePack();
 
     }
 }
