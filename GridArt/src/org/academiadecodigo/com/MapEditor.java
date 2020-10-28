@@ -1,22 +1,15 @@
 package org.academiadecodigo.com;
 
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.mouse.Mouse;
-import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
 import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class Game {
+public class MapEditor {
 
     private Grid grid;
     private Cursor cursor;
     private MenuGrid menu;
 
-    public Game(int l, int c) {
+    public MapEditor(int l, int c) {
         grid = new Grid(l, c);
         menu = new MenuGrid();
         cursor = new Cursor(grid, menu);
@@ -32,9 +25,5 @@ public class Game {
         KeyboardListener listener = new KeyboardListener(cursor, grid);
 
     }
-
-
-
-
 
 }
