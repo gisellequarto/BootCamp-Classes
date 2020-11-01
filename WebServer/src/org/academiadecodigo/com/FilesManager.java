@@ -33,11 +33,10 @@ public class FilesManager {
         } catch (IOException e) {
             System.out.println("Read file bytes bug" + e);
         }
-        System.out.println(counter);
         return counter;
     }
 
-    public static InputStream getInput() {
+    public static FileInputStream getInput() {
         return inputStream;
     }
 

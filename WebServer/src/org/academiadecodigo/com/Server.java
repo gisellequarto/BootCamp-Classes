@@ -13,10 +13,11 @@ public class Server {
     private BufferedReader in;
     private String[] headerFirstLine;
     private int fileByteSize;
+    private BufferedOutputStream out;
 
     private String headerText = ("HTTP/1.0 200 Document Follows\r\n" +
             "Content-Type: text/html; charset=UTF-8\r\n" +
-            "Content-Length: " + "1444" + " \r\n" +
+            "Content-Length: <file_byte_size> \r\n" +
             "\r\n");
 
     public void makeConnection() {
@@ -46,7 +47,7 @@ public class Server {
         return false;
     }
 
-    public int getArchiveIndex() {
+    public int analyzeRequest() {
         String[] archivesPaths = FilesManager.getArchivesPaths();
         if (analyzeVerb()) {
             if (headerFirstLine[1].equals("/")) {
@@ -65,9 +66,8 @@ public class Server {
 
 
     public void setFileSize() {
-        FilesManager.getArchive(getArchiveIndex());
+        FilesManager.getArchive(analyzeRequest());
         fileByteSize = FilesManager.getArchiveByteSize();
-        System.out.println(fileByteSize);
     }
 
 
@@ -77,25 +77,33 @@ public class Server {
             return;
         }
         setFileSize();
-        System.out.println(fileByteSize);
-        System.out.println(headerText);
+        String size = "" + fileByteSize;
+        headerText = headerText.replace("<file_byte_size>", size);
         byte[] headerBytes = headerText.getBytes();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        out.write(headerBytes, 0, headerBytes.length);
+
+        try {
+            out = new BufferedOutputStream(clientSocket.getOutputStream());
+            out.write(headerBytes, 0, headerBytes.length);
+            out.flush();
+            System.out.println("header gone");
+        } catch (IOException e) {
+            System.out.println("Send Response Header bug" + e.getMessage());
+        }
     }
 
     public void serverResponse() {
         sendResponseHeader();
-        InputStream in = FilesManager.getInput();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        FileInputStream in = FilesManager.getInput();
         byte[] fileBuffer = new byte[2048];
         int n = 0;
         try {
+            out = new BufferedOutputStream(clientSocket.getOutputStream());
             while ((n = in.read(fileBuffer)) != -1) {
+                System.out.println("file gone");
+//                in.read(fileBuffer);
                 out.write(fileBuffer, 0, fileBuffer.length);
                 out.flush();
             }
-
         } catch (IOException e) {
             System.out.println("Server Response bug" + e.getMessage());
         }
@@ -108,6 +116,7 @@ public class Server {
             clientSocket.close();
             inputStream.close();
             in.close();
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
