@@ -7,7 +7,10 @@ public class Main {
 
         server.makeConnection();
         server.receiveHeader();
+        server.analyzeVerb();
+        server.getArchive();
         server.serverResponse();
+
 
     }
 }

@@ -9,11 +9,15 @@ public class Server {
     private int portNumber = 9999;
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private InputStreamReader inputStream;
+    private InputStreamReader inputHeader;
     private BufferedReader in;
     private String[] headerFirstLine;
     private int fileByteSize;
     private BufferedOutputStream out;
+    private FileInputStream inputSize;
+    private FileInputStream inputFile;
+    private static String[] archivesPaths = {"/notFound", "/photo", "/music"};
+
 
     private String headerText = ("HTTP/1.0 200 Document Follows\r\n" +
             "Content-Type: text/html; charset=UTF-8\r\n" +
@@ -31,8 +35,8 @@ public class Server {
 
     public void receiveHeader() {
         try {
-            inputStream = new InputStreamReader(clientSocket.getInputStream());
-            in = new BufferedReader(inputStream);
+            inputHeader = new InputStreamReader(clientSocket.getInputStream());
+            in = new BufferedReader(inputHeader);
             String received = in.readLine();
             headerFirstLine = received.split(" ");
         } catch (IOException e) {
@@ -47,27 +51,48 @@ public class Server {
         return false;
     }
 
-    public int analyzeRequest() {
-        String[] archivesPaths = FilesManager.getArchivesPaths();
+    public String getFilePath() {
         if (analyzeVerb()) {
             if (headerFirstLine[1].equals("/")) {
-                return -1;
+                return "";
             }
 
             for (int i = 0; i < archivesPaths.length; i++) {
                 if (headerFirstLine[1].equals(archivesPaths[i])) {
-                    return i;
+                    return archivesPaths[i];
                 }
             }
-            return 0;
+            return archivesPaths[0];
         }
-        return -1;
+        return "";
     }
 
 
-    public void setFileSize() {
-        FilesManager.getArchive(analyzeRequest());
-        fileByteSize = FilesManager.getArchiveByteSize();
+    public void getArchive() {
+        String path = getFilePath();
+        if (path == "") {
+            return;
+        }
+        try {
+            path = path.substring(1);
+            inputSize = new FileInputStream(path);
+            inputFile = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            System.out.println("Finding File Bug" + e.getMessage());
+        }
+    }
+
+
+    public void getArchiveByteSize() {
+        fileByteSize = 0;
+        int b = 0;
+        try {
+            while ((b = inputSize.read()) != -1) {
+                fileByteSize++;
+            }
+        } catch (IOException e) {
+            System.out.println("Read file bytes bug" + e);
+        }
     }
 
 
@@ -76,9 +101,10 @@ public class Server {
             closeServer();
             return;
         }
-        setFileSize();
+        getArchiveByteSize();
         String size = "" + fileByteSize;
         headerText = headerText.replace("<file_byte_size>", size);
+        System.out.println(headerText);
         byte[] headerBytes = headerText.getBytes();
 
         try {
@@ -93,16 +119,15 @@ public class Server {
 
     public void serverResponse() {
         sendResponseHeader();
-        FileInputStream in = FilesManager.getInput();
         byte[] fileBuffer = new byte[2048];
         int n = 0;
         try {
-            out = new BufferedOutputStream(clientSocket.getOutputStream());
-            while ((n = in.read(fileBuffer)) != -1) {
+            BufferedOutputStream outFile = new BufferedOutputStream(clientSocket.getOutputStream());
+            while ((n = inputFile.read(fileBuffer)) != -1) {
                 System.out.println("file gone");
-//                in.read(fileBuffer);
-                out.write(fileBuffer, 0, fileBuffer.length);
-                out.flush();
+                inputFile.read(fileBuffer);
+                outFile.write(fileBuffer, 0, fileBuffer.length);
+                outFile.flush();
             }
         } catch (IOException e) {
             System.out.println("Server Response bug" + e.getMessage());
@@ -114,7 +139,7 @@ public class Server {
         try {
             serverSocket.close();
             clientSocket.close();
-            inputStream.close();
+            inputHeader.close();
             in.close();
             out.close();
         } catch (IOException e) {
