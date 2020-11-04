@@ -43,8 +43,7 @@ public class Server {
         if (message == null) {
             return;
         }
-        String clientName = (clientHandler.getName() + clientList.indexOf(clientHandler));
-        String broadcast = ( clientName + ": " + message);
+        String broadcast = (clientHandler.getName() + ": " + message);
         for (ClientHandler c : clientList) {
             if(c == clientHandler) {
                 continue;
@@ -55,9 +54,31 @@ public class Server {
 
     public void listClients(ClientHandler clientHandler) {
         for (ClientHandler c : clientList) {
-            clientHandler.send(c.getName() + clientList.indexOf(c));
+            clientHandler.send(c.getName());
         }
     }
+
+    public void whisper(String otherClient, String message) {
+        for(ClientHandler c : clientList){
+            if(c.getName().equals(otherClient)){
+                c.send(message);
+            }
+        }
+    }
+
+    public void notificate(String message, ClientHandler clientHandler) {
+        for (ClientHandler c : clientList) {
+            if(c == clientHandler) {
+                continue;
+            }
+            c.send(message);
+        }
+    }
+
+    public int getClientNumber(ClientHandler clientHandler) {
+        return clientList.indexOf(clientHandler);
+    }
+
 
 }
 

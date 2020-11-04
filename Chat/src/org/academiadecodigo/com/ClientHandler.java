@@ -15,6 +15,8 @@ public class ClientHandler implements Runnable {
     private InputStreamReader inputStream;
     private BufferedReader in;
     private String name;
+    private final String quitMessage = " quit the chat.";
+    private final String arriveMessage = " entered the chat.";
 
     public ClientHandler(Server server, Socket client, String name) {
         this.server = server;
@@ -28,7 +30,10 @@ public class ClientHandler implements Runnable {
         try {
             inputStream = new InputStreamReader(client.getInputStream());
             in = new BufferedReader(inputStream);
+            String realName = name + server.getClientNumber(this);
+            setName(realName);
             String received = "";
+            server.notificate(name + arriveMessage, this);
             while (!client.isClosed()) {
 
                 while ((received = in.readLine()) == null) {
@@ -74,10 +79,32 @@ public class ClientHandler implements Runnable {
             server.listClients(this);
             return false;
         } else if (input.contains("/whisper")) {
-            //fazer as alterações
+            String[] result = whisperCommand(input);
+            server.whisper(result[0], result[1]);
             return false;
+        } else if(input.contains("/quit")) {
+            server.notificate(name + quitMessage, this);
+            quitChat();
+            return  false;
         }
         return true;
     }
 
+    private String[] whisperCommand(String input) {
+        String[] temp = input.split(" ");
+        String message = "";
+        for(int i = 2; i < temp.length; i++) {
+            message += temp[i] + " ";
+        }
+        String[] result = {temp[1], message};
+        return result;
+    }
+
+    private void quitChat() {
+        try {
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
