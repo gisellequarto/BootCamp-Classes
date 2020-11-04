@@ -5,20 +5,22 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
 public enum Person {
 /*
     BEBETO,
-    BIA,
-    CATARINA,
-    DANIEL,
-    GISELLE,
-    JOAO,
-    LEONARDO,
-    MAITE,*/
-    MAY("M", "assets/May.jpeg");
+    BIA,*/
+    CARLA("M", "assets/Carla.jpeg"),
+   // CATARINA
+    DANIEL("D", "assets/Daniel.jpeg"),
+    //GISELLE,
+    JOAO("J", "assets/Joao.jpeg"),
+    //LEONARDO,
+    //MAITE,*/
+    MAY("M", "assets/May.jpeg"),
    /* MEL,
     NAIARA,
     RICARDO,
     RODRIGO,
-    ROGERIO;
-*/
+    ROGERIO*/
+    VANIA("V", "assets/Vania.jpeg");
+
     private String letter;
     private String picturePath;
 

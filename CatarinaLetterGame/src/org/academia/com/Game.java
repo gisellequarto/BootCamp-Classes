@@ -7,8 +7,7 @@ public class Game {
 
         Grid grid = new Grid();
 
-       GameObjects may = new GameObjects(Person.MAY);
-       may.showRandom();
+       GameObjects person = new GameObjects(Person.VANIA);
 
     }
 }
