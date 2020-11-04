@@ -19,10 +19,15 @@ public class Server {
     private static String[] archivesPaths = {"/notFound", "/photo", "/music"};
 
 
-    private String headerText = ("HTTP/1.0 200 Document Follows\r\n" +
+    private String headerText = "HTTP/1.0 200 Document Follows\r\n" +
             "Content-Type: text/html; charset=UTF-8\r\n" +
             "Content-Length: <file_byte_size> \r\n" +
-            "\r\n");
+            "\r\n";
+
+    private String headerImage = "HTTP/1.0 200 Document Follows\r\n" +
+            "Content-Type: image/jpeg \r\n" +
+            "Content-Length: <file_byte_size> \r\n" +
+            "\r\n";
 
     public void makeConnection() {
         try {
@@ -65,6 +70,7 @@ public class Server {
             return archivesPaths[0];
         }
         return "";
+
     }
 
 
@@ -103,10 +109,18 @@ public class Server {
         }
         getArchiveByteSize();
         String size = "" + fileByteSize;
-        headerText = headerText.replace("<file_byte_size>", size);
-        System.out.println(headerText);
-        byte[] headerBytes = headerText.getBytes();
+        byte[] headerBytes;
 
+
+        if (getFilePath() == archivesPaths[0]) {
+            headerImage = headerImage.replace("<file_byte_size>", size);
+            System.out.println(headerImage);
+            headerBytes = headerImage.getBytes();
+        } else {
+            headerText = headerText.replace("<file_byte_size>", size);
+            System.out.println(headerText);
+            headerBytes = headerText.getBytes();
+        }
         try {
             out = new BufferedOutputStream(clientSocket.getOutputStream());
             out.write(headerBytes, 0, headerBytes.length);
