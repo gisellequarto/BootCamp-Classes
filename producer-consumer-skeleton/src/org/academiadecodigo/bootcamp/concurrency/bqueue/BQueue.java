@@ -36,9 +36,9 @@ public class BQueue<T> {
                 e.printStackTrace();
             }
         }
-        System.out.println(Thread.currentThread().getName() + " put a element >>QUEUE SIZE: " + (queue.size() + 1) + "<<");
         notifyAll();
         queue.offer(data);
+        System.out.println(Thread.currentThread().getName() + " put a element >>QUEUE SIZE: " + (queue.size()) + "<<");
     }
 
     /**
@@ -48,15 +48,15 @@ public class BQueue<T> {
      * @return the data from the head of the queue
      */
     public synchronized T poll() {
-        while (getSize() == 0) {
+        while (getSize() <= 0) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println(Thread.currentThread().getName() + " took a element >>QUEUE SIZE: " + (queue.size() - 1) + "<<");
         notifyAll();
-        System.out.println(Thread.currentThread().getName() + "took a element >>QUEUE SIZE: " + (queue.size() - 1) + "<<");
         return queue.poll();
     }
 

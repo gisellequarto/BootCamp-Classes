@@ -26,11 +26,13 @@ public class Producer implements Runnable {
     @Override
     public void run() {
         while (product <= elementNum) {
-            queue.offer(product);
-            if (queue.getSize() == queue.getLimit()) {
-                System.out.println(">> QUEUE IS FULL<<");
+            synchronized (queue) {
+                queue.offer(product);
+                if (queue.getSize() == queue.getLimit()) {
+                    System.out.println(">> QUEUE IS FULL<<");
+                }
+                product++;
             }
-            product++;
         }
     }
 

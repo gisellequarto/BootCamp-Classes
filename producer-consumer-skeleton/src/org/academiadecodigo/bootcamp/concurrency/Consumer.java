@@ -22,11 +22,14 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         while (elementNum > 0) {
-            queue.poll();
-            if (queue.getSize() == 0) {
-                System.out.println(">>QUEUE IS EMPTY");
+            synchronized (queue) {
+
+                queue.poll();
+                if (queue.getSize() == 0) {
+                    System.out.println(">>QUEUE IS EMPTY");
+                }
+                elementNum--;
             }
-            elementNum--;
         }
     }
 

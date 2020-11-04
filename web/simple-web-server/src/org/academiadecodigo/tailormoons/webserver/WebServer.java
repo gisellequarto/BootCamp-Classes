@@ -1,11 +1,10 @@
 package org.academiadecodigo.tailormoons.webserver;
 
-import org.academiadecodigo.tailormoons.webserver.request.Request;
-import org.academiadecodigo.tailormoons.webserver.request.InvalidRequestException;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WebServer {
 
@@ -17,6 +16,7 @@ public class WebServer {
     }
 
     public void startReceive() {
+        ExecutorService fixedThreadManager = Executors.newFixedThreadPool(500);
         while (!serverSocket.isClosed()) {
             Socket client = null;
 
@@ -27,14 +27,15 @@ public class WebServer {
                 System.out.println("Connection received from " + client.getInetAddress() + ":" + client.getPort());
 
 
-                Thread threadSend = new Thread(new ClientHandler(client));
-                threadSend.start();
+                fixedThreadManager.submit(new ClientHandler(client));
+
 
             } catch (IOException e) {
                 System.err.println("Error handling client request: " + e.getMessage());
 
             }
         }
+        fixedThreadManager.shutdown();
     }
 
 
