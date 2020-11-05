@@ -1,4 +1,4 @@
-package org.academiadecodigo.com;
+package org.academiadecodigo.tailormoons.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,6 +38,10 @@ public class ClientHandler implements Runnable {
 
                 while ((received = in.readLine()) == null) {
                     wait();
+                }
+                if(received.contains("/quit")){
+                    analyzeCommand(received);
+                    break;
                 }
                 if (analyzeCommand(received)) {
                     server.sendBroadcast(received, this);
@@ -102,6 +106,7 @@ public class ClientHandler implements Runnable {
 
     private void quitChat() {
         try {
+            server.deleteList(this);
             client.close();
         } catch (IOException e) {
             e.printStackTrace();

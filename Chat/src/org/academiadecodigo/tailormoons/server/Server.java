@@ -1,4 +1,6 @@
-package org.academiadecodigo.com;
+package org.academiadecodigo.tailormoons.server;
+
+import org.academiadecodigo.tailormoons.server.ClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -79,6 +81,9 @@ public class Server {
         return clientList.indexOf(clientHandler);
     }
 
+    public void deleteList(ClientHandler clientHandler){
+        clientList.remove(clientHandler);
+    }
 
 }
 

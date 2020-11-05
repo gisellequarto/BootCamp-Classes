@@ -1,6 +1,6 @@
-package org.academiadecodigo.com;
+package org.academiadecodigo.tailormoons.server;
 
-public class Chat {
+public class ChatServer {
 
     public static void main(String[] args) {
 
