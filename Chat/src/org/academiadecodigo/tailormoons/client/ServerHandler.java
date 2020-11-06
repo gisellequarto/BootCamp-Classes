@@ -17,9 +17,8 @@ public class ServerHandler implements Runnable {
     public void run() {
         while (!clientSocket.isClosed()) {
             String received = getServerInput();
-            if(received == null) {
-                close();
-                break;
+            if (received.startsWith("/quit")) {
+                System.exit(0);
             }
             System.out.println(received);
         }
@@ -38,7 +37,7 @@ public class ServerHandler implements Runnable {
         return received;
     }
 
-    public void close(){
+    public void close() {
         try {
             clientSocket.close();
         } catch (IOException e) {
