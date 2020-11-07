@@ -1,4 +1,4 @@
-package org.academiadecodigo.com;
+package org.academiadecodigo.tailormoons.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,6 +39,10 @@ public class ClientHandler implements Runnable {
                 while ((received = in.readLine()) == null) {
                     wait();
                 }
+                if (received.contains("/quit")) {
+                    analyzeCommand(received);
+                    break;
+                }
                 if (analyzeCommand(received)) {
                     server.sendBroadcast(received, this);
 
@@ -66,7 +70,7 @@ public class ClientHandler implements Runnable {
         return name;
     }
 
-    public void setName(String other){
+    public void setName(String other) {
         name = other;
     }
 
@@ -82,10 +86,11 @@ public class ClientHandler implements Runnable {
             String[] result = whisperCommand(input);
             server.whisper(result[0], result[1]);
             return false;
-        } else if(input.contains("/quit")) {
+        } else if (input.contains("/quit")) {
             server.notificate(name + quitMessage, this);
-            quitChat();
-            return  false;
+            server.deleteList(this);
+            System.exit(0);
+            return false;
         }
         return true;
     }
@@ -93,18 +98,11 @@ public class ClientHandler implements Runnable {
     private String[] whisperCommand(String input) {
         String[] temp = input.split(" ");
         String message = "";
-        for(int i = 2; i < temp.length; i++) {
+        for (int i = 2; i < temp.length; i++) {
             message += temp[i] + " ";
         }
         String[] result = {temp[1], message};
         return result;
     }
 
-    private void quitChat() {
-        try {
-            client.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
