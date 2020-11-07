@@ -18,11 +18,12 @@ public class KeyboardListener implements KeyboardHandler {
             KeyboardEvent.KEY_N,
             KeyboardEvent.KEY_R,
             KeyboardEvent.KEY_V,
-
     };
 
+    private Grid grid;
 
-    public KeyboardListener() {
+    public KeyboardListener(Grid grid) {
+        this.grid = grid;
         init();
     }
 
@@ -45,30 +46,49 @@ public class KeyboardListener implements KeyboardHandler {
     public void pressed(int key) {
         switch (key) {
             case KeyboardEvent.KEY_B:
+                grid.show(0);
                 break;
             case KeyboardEvent.KEY_C:
+                int c = getRandomTWO() + 1;
+                grid.show(c);
                 break;
             case KeyboardEvent.KEY_D:
-                new GameObjects(Person.DANIEL);
+                grid.show(3);
                 break;
             case KeyboardEvent.KEY_G:
+                grid.show(4);
                 break;
             case KeyboardEvent.KEY_J:
-                new GameObjects(Person.JOAO);
+                grid.show(5);
                 break;
             case KeyboardEvent.KEY_L:
+                grid.show(6);
                 break;
             case KeyboardEvent.KEY_M:
-                new GameObjects(Person.MAY);
+                int m = getRandomTHREE() + 7;
+                grid.show(m);
                 break;
             case KeyboardEvent.KEY_N:
                 break;
             case KeyboardEvent.KEY_R:
+                int r = getRandomTHREE()  + 10;
+                grid.show(r);
                 break;
             case KeyboardEvent.KEY_V:
-                new GameObjects(Person.VANIA);
+                grid.show(13);
                 break;
         }
+    }
+
+
+    public int getRandomTHREE() {
+        int rand = ((int) (Math.random() * 3));
+        return rand;
+    }
+
+    public int getRandomTWO() {
+        int rand = ((int) (Math.random() * 2));
+        return rand;
     }
 
     @Override

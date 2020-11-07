@@ -5,8 +5,6 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.Map;
-
 public class GameObjects {
 
     private Text letter;
@@ -14,7 +12,7 @@ public class GameObjects {
     Color letterColor = new Color(7, 115, 162);
     private static Rectangle pictureBorder = new Rectangle(420, 80, 370, 370);
     private Color colorPicBoarder = new Color(172, 0, 87);
-    private GameObjects[] objects = {new GameObjects(Person.CARLA), new GameObjects(Person.DANIEL), new GameObjects(Person.JOAO), new GameObjects(Person.MAY), new GameObjects(Person.VANIA)};
+
 
     public GameObjects(Person person) {
         letter = new Text(125, 360, person.getLetter());
@@ -24,30 +22,15 @@ public class GameObjects {
         pictureBorder.setColor(colorPicBoarder);
     }
 
-
-    public void show() {
-        cleanObjects();
-        letter.draw();
-        pictureBorder.fill();
-        photo.draw();
-
+    public Text getLetter() {
+        return letter;
     }
 
-    public void cleanElements() {
-        photo.delete();
-        letter.delete();
+    public Picture getPhoto() {
+        return photo;
     }
 
-    public void cleanObjects() {
-        for (GameObjects g : objects) {
-            g.cleanElements();
-        }
-
+    public Rectangle getPictureBorder() {
+        return pictureBorder;
     }
-
-
-    public void command (int index){
-        objects[index].show();
-    }
-
 }

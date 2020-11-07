@@ -3,7 +3,9 @@ package org.academiadecodigo.com;
 import javax.swing.*;
 
 public class Main {
+
     public static void main(String[] args) {
+
 
         String name = JOptionPane.showInputDialog("Insert your name:");
         String ready = JOptionPane.showInputDialog("Are you ready? [y/n]");
@@ -14,7 +16,6 @@ public class Main {
         UserBox user = new UserBox();
         KeyboardListener listener = new KeyboardListener(user);
         listener.init();
-
 
     }
 }

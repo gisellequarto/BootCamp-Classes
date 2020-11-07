@@ -7,7 +7,7 @@ public class Game {
 
     public static void main(String[] args) {
         Grid grid = new Grid();
-        KeyboardListener keyboardListener = new KeyboardListener();
+        KeyboardListener keyboardListener = new KeyboardListener(grid);
 
 
     }

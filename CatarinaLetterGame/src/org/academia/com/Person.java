@@ -3,22 +3,22 @@ package org.academia.com;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
 public enum Person {
-/*
-    BEBETO,
-    BIA,*/
-    CARLA("M", "assets/Carla.jpeg"),
-   // CATARINA
+
+    BEBETO ("B", "assets/Bebeto.jpeg"),
+    //BIA,
+    CARLA("C", "assets/Carla.jpeg"),
+    CATARINA("C", "assets/Catarina.jpeg"),
     DANIEL("D", "assets/Daniel.jpeg"),
-    //GISELLE,
-    JOAO("J", "assets/Joao.jpeg"),
-    //LEONARDO,
-    //MAITE,*/
+    GISELLE ("G", "assets/Giselle.jpeg"),
+    JOAO("j", "assets/Joao.jpeg"),
+    LEONARDO("L", "assets/Leo.png"),
+    MAITE("M", "assets/Maite.png"),
     MAY("M", "assets/May.jpeg"),
-   /* MEL,
-    NAIARA,
-    RICARDO,
-    RODRIGO,
-    ROGERIO*/
+    MEL ("M", "assets/Mel.png"),
+    //NAIARA,
+    RICARDO ("R", "assets/Ricardo.png"),
+    RODRIGO ("R", "assets/Rodrigo.jpeg"),
+    ROGERIO ("R", "assets/Rogerio.png"),
     VANIA("V", "assets/Vania.jpeg");
 
     private String letter;
