@@ -9,7 +9,6 @@ public class Game {
         Grid grid = new Grid();
         KeyboardListener keyboardListener = new KeyboardListener(grid);
 
-
     }
 
 

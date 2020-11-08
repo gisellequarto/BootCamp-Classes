@@ -17,18 +17,22 @@ public class TerminalHandler implements Runnable {
 
     @Override
     public void run() {
+
+
+
+
+
+
+
+        scanner = new Scanner(System.in);
+
+
         while (!clientSocket.isClosed()) {
-            String received = getTerminalInput();
+            String received = scanner.nextLine();
             sendServer(received);
         }
     }
 
-
-    public String getTerminalInput() {
-        scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        return input;
-    }
 
     public void sendServer(String message) {
         try {
