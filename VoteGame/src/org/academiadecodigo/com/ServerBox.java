@@ -16,7 +16,7 @@ public class ServerBox {
         serverBox.draw();
     }
 
-    public void setServerBox (String text) {
+    public void setServerBox(String text) {
         text = text.replaceAll(" ", "  ");
         this.text = text;
         serverBox.setText(text);
