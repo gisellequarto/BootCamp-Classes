@@ -10,11 +10,11 @@ public class UserBox {
 
     public UserBox() {
         builder = new StringBuilder();
-        //userBox.grow(40, 50);
         showUserBox();
     }
 
     public void showUserBox() {
+        userBox.setFont(40);
         userBox.draw();
     }
 
@@ -39,7 +39,7 @@ public class UserBox {
             case KeyboardEvent.KEY_SPACE:
                 setText(" ");
                 break;
-            case KeyboardEvent.KEY_DOWN:
+            case KeyboardEvent.KEY_BACKSPACE:
                 eraseText();
                 break;
             case KeyboardEvent.KEY_A:

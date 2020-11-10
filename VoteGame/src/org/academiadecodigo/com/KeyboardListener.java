@@ -9,8 +9,7 @@ public class KeyboardListener implements KeyboardHandler {
 
     private static int[] KEY_CODES = {
             KeyboardEvent.KEY_SPACE,
-            KeyboardEvent.KEY_DOWN,
-            //backspace missing
+            KeyboardEvent.KEY_BACKSPACE,
             KeyboardEvent.KEY_A,
             KeyboardEvent.KEY_B,
             KeyboardEvent.KEY_C,
