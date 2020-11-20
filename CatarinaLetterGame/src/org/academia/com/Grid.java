@@ -31,6 +31,7 @@ public class Grid {
                                     new GameObjects(Person.MAITE),
                                     new GameObjects(Person.MAY),
                                     new GameObjects(Person.MEL),
+                                    new GameObjects(Person.NAIARA),
                                     new GameObjects(Person.RICARDO),
                                     new GameObjects(Person.RODRIGO),
                                     new GameObjects(Person.ROGERIO),

@@ -15,7 +15,7 @@ public enum Person {
     MAITE("M", "assets/Maite.png"),
     MAY("M", "assets/May.jpeg"),
     MEL ("M", "assets/Mel.png"),
-    //NAIARA,
+    NAIARA ("N", "assets/Naiara.png"),
     RICARDO ("R", "assets/Ricardo.png"),
     RODRIGO ("R", "assets/Rodrigo.jpeg"),
     ROGERIO ("R", "assets/Rogerio.png"),

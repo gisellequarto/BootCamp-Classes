@@ -69,13 +69,14 @@ public class KeyboardListener implements KeyboardHandler {
                 grid.show(m);
                 break;
             case KeyboardEvent.KEY_N:
+                grid.show(10);
                 break;
             case KeyboardEvent.KEY_R:
-                int r = getRandomTHREE()  + 10;
+                int r = getRandomTHREE()  + 11;
                 grid.show(r);
                 break;
             case KeyboardEvent.KEY_V:
-                grid.show(13);
+                grid.show(14);
                 break;
         }
     }
