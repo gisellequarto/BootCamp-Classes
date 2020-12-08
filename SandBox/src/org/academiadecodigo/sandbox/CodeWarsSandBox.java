@@ -1,12 +1,14 @@
 package org.academiadecodigo.sandbox;
 
+import java.util.stream.Stream;
+
 public class CodeWarsSandBox {
 
     public static void main(String[] args) {
 
         int[] test = {5, -3, 4};
 
-        System.out.println(squareSum(test));
+        System.out.println(simpleSum(test));
 
 
 
@@ -14,11 +16,7 @@ public class CodeWarsSandBox {
     }
 
 
-    public static int squareSum(int[] n) {
-        int result = 0;
-        for (int num : n) {
-            result += (Math.pow(num, 2));
-        }
-        return result;
+    public static int simpleSum(int[] n) {
+        
     }
 }
